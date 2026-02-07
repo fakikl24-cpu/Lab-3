@@ -1,7 +1,7 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Kryschelle Fakir
+2/6/2026
 
 ### Load packages and data
 
@@ -19,6 +19,17 @@ Here is a link to the [lab
 instructions](https://datascience4psych.github.io/DataScience4Psych/lab03.html).
 
 ### Exercise 1
+
+``` data
+# There are 1026 observations and 26 variables in the nobel dataset. Each row represents a nobel prize winner.
+
+nobel %>%
+  filter( 
+    is.na(died_date),
+    !is.na(country), 
+    gender != "org"
+  ) 
+```
 
 Remove this text, and add your answer for Exercise 1 here. Add code
 chunks as needed. Don’t forget to label your code chunk. Do not use

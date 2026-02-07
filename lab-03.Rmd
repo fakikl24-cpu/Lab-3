@@ -1,7 +1,7 @@
 ---
 title: "Lab 03 - Nobel laureates"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Kryschelle Fakir"
+date: "2/6/2026"
 output: github_document
 ---
 
@@ -20,6 +20,17 @@ nobel <- read_csv("data/nobel.csv")
 Here is a link to the [lab instructions](https://datascience4psych.github.io/DataScience4Psych/lab03.html).
 
 ### Exercise 1
+
+```{Data Frame with Still Alive, Country, and no Orgs}
+# There are 1026 observations and 26 variables in the nobel dataset. Each row represents a nobel prize winner.
+
+nobel %>%
+  filter( 
+    is.na(died_date),
+    !is.na(country), 
+    gender != "org"
+  ) 
+```
 
 Remove this text, and add your answer for Exercise 1 here.
 Add code chunks as needed.
