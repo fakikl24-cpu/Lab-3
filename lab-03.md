@@ -21,7 +21,6 @@ instructions](https://datascience4psych.github.io/DataScience4Psych/lab03.html).
 ### Exercise 1
 
 ``` data
-# There are 1026 observations and 26 variables in the nobel dataset. Each row represents a nobel prize winner.
 
 nobel %>%
   filter( 
@@ -31,9 +30,8 @@ nobel %>%
   ) 
 ```
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+There are 1026 observations and 26 variables in the nobel dataset. Each
+row represents a nobel prize winner.
 
 ### Exercise 2
 
