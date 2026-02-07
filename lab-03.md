@@ -20,9 +20,8 @@ instructions](https://datascience4psych.github.io/DataScience4Psych/lab03.html).
 
 ### Exercise 1
 
-``` data
-
-nobel %>%
+``` r
+nobel_living <- nobel %>%
   filter( 
     is.na(died_date),
     !is.na(country), 
@@ -35,23 +34,97 @@ row represents a nobel prize winner.
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+nobel_living <- nobel_living %>%
+  mutate(
+    country_us = if_else(country == "USA", "USA", "Other")
+  )
+
+nobel_living_science <- nobel_living %>%
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+ggplot(
+  data = nobel_living_science,
+       mapping = aes(
+         x = country_us
+       )
+) + 
+  geom_bar() +
+  facet_wrap(~category) + 
+  coord_flip() + 
+  labs(
+    title = "Relationship B/T Category and Country",
+    subtitle = "Country being whether the recipient was in the U.S when they won",
+    x = "In the US or Not",
+    y = "Category"
+  )
+```
+
+![](lab-03_files/figure-gfm/make-barplot-1.png)<!-- -->
+
+Based on the visualization, it does seem that most winners were based in
+the US when they won their nobel prize. However, the Chemistry and
+Physics categories are very close, especially compared to the Economics
+category. This may suggest that lots of folks are studying the U.S’
+economics (I wonder why… \>:T)
 
 ### Exercise 4
 
-…
+``` r
+nobel_living <- nobel_living %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA", "USA", "Other")
+  ) 
+
+nobel_living %>%
+  count(born_country_us)
+```
+
+    ## # A tibble: 3 × 2
+    ##   born_country_us     n
+    ##   <chr>           <int>
+    ## 1 Other             138
+    ## 2 USA               113
+    ## 3 <NA>                2
+
+113 of the U.S based Nobel laureates were born in the U.S.
 
 ### Exercise 5
 
-…
+``` r
+nobel_living_science <- nobel_living_science %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA", "USA", "Other")
+  ) 
+
+ggplot(
+  data = nobel_living_science,
+       mapping = aes(
+         x = country_us,
+         fill = born_country_us
+       )
+) + 
+  geom_bar() +
+  facet_wrap(~category) + 
+  coord_flip() + 
+  labs(
+    title = "Relationship B/T Category and U.S. Based",
+    subtitle = "By U.S. Born",
+    fill = "Born in the U.S",
+    x = "U.S Based or Other",
+    y = "Category"
+  ) 
+```
+
+![](lab-03_files/figure-gfm/make-born-in-us-barplot-1.png)<!-- -->
+
+Based on the visualization above, Buzzfeed’s claim is incorrect.
+Majority of the U.S based Nobel Laureates are born in the U.S. Of those
+based in the U.S, regardless of category, majority are born in the U.S.
 
 ### Exercise 6
 
