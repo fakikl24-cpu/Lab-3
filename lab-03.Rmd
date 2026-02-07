@@ -23,6 +23,9 @@ Here is a link to the [lab instructions](https://datascience4psych.github.io/Dat
 
 ```{r make-living-nobel-winners-data}
 
+glimpse(nobel)
+dim(nobel)
+
 nobel_living <- nobel %>%
   filter( 
     is.na(died_date),
@@ -44,6 +47,8 @@ nobel_living <- nobel_living %>%
 
 nobel_living_science <- nobel_living %>%
   filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+
+dim(nobel_living_science)
 
 ```
 
@@ -119,4 +124,17 @@ Based on the visualization above, Buzzfeed's claim is incorrect. Majority of the
 
 ### Exercise 6
 
-...
+```{r where-immigrant-nobelists-born}
+
+nobel_born_outside_us <- nobel_living_science %>%
+  filter(
+    country_us == "USA",
+    born_country_us == "Other")
+
+nobel_born_outside_us %>%
+  count(born_country) %>%
+  arrange(desc(n))
+
+```
+
+The most common country is the United Kingdom.  
